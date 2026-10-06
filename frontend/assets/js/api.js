@@ -19,14 +19,32 @@ const VALIDATION_FIELD_LABELS = {
     partner_mbti: '연인 MBTI',
 };
 
+// Exact, fixed user messages reviewed in backend/app/main.py::validation_error
+// and backend/app/chart.py::_calendar. Never display arbitrary server exception
+// text or Pydantic msg/input/context values; new messages need explicit review.
+const SAFE_VALIDATION_MESSAGES = new Set([
+    '개인정보 처리 안내를 확인하고 분석에 동의해주세요.',
+    '만 18세 이상인 경우에 이용할 수 있습니다.',
+    '현재 버전에서는 본인의 정보만 입력해주세요.',
+    '생년월일은 1900-01-01부터 오늘 사이여야 합니다.',
+    '올바른 MBTI 형식이 아닙니다.',
+    '태어난 시간을 입력하거나 시간 모름을 선택해주세요.',
+    '본인의 윤달은 음력을 선택했을 때만 사용할 수 있습니다.',
+    '연인의 윤달은 음력을 선택했을 때만 사용할 수 있습니다.',
+    '본인의 음력 날짜를 변환할 수 없습니다. 날짜와 윤달 여부를 확인해주세요.',
+    '연인의 음력 날짜를 변환할 수 없습니다. 날짜와 윤달 여부를 확인해주세요.',
+    '생년월일을 변환할 수 없습니다. 날짜와 양력·음력·윤달 여부를 확인해주세요.',
+    '입력값의 형식과 허용 범위를 확인해주세요.',
+]);
+
 function getValidationMessage(error) {
-    const type = String(error?.type || '');
+    const type = typeof error?.type === 'string' ? error.type : '';
     if (type === 'missing') return '필수 항목입니다.';
     if (type.includes('date')) return '올바른 날짜를 선택해주세요.';
     if (type.includes('time')) return '올바른 시간을 입력해주세요.';
     if (type.includes('literal')) return '제공된 항목 중에서 선택해주세요.';
     if (type.includes('string_too_short')) return '값을 입력해주세요.';
-    return error?.msg || '올바른 값을 입력해주세요.';
+    return SAFE_VALIDATION_MESSAGES.has(error?.msg) ? error.msg : '올바른 값을 입력해주세요.';
 }
 
 function resolveApiBaseUrl() {
@@ -85,12 +103,14 @@ class ApiError extends Error {
 
     getUserMessage() {
         if (this.isValidationError()) {
-            const details = this.data.detail;
+            const details = this.data?.detail;
+            if (SAFE_VALIDATION_MESSAGES.has(details)) return details;
             if (Array.isArray(details) && details.length > 0) {
                 const firstError = details[0];
-                const location = Array.isArray(firstError.loc) ? firstError.loc : [];
+                const location = Array.isArray(firstError?.loc) ? firstError.loc : [];
                 const fieldKey = location.at(-1);
-                const field = VALIDATION_FIELD_LABELS[fieldKey] || '입력값';
+                const field = typeof fieldKey === 'string' && Object.hasOwn(VALIDATION_FIELD_LABELS, fieldKey)
+                    ? VALIDATION_FIELD_LABELS[fieldKey] : '입력값';
                 return `${field}: ${getValidationMessage(firstError)}`;
             }
             return '입력하신 정보를 다시 확인해주세요.';

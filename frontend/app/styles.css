@@ -6,6 +6,8 @@
   --line: #ccd7e4;
   --blue: #5261c9;
   --deep: #203a54;
+  --toast-bg: #203a54;
+  --toast-ink: #fff;
   --soft: #e4ebf7;
   --peach: #f2bda8;
   --body-size: 18px;
@@ -860,8 +862,8 @@ progress::-moz-progress-bar {
   z-index: 200;
   max-width: calc(100% - 32px);
   width: max-content;
-  background: var(--deep);
-  color: white;
+  background: var(--toast-bg);
+  color: var(--toast-ink);
   box-shadow: 0 5px 25px #0002;
   padding: 15px 24px;
   border-radius: 12px;
@@ -1374,6 +1376,8 @@ dialog p {
   --line: #4c6077;
   --blue: #bac3ff;
   --deep: #d4e1ff;
+  --toast-bg: #d4e1ff;
+  --toast-ink: #1b2a43;
   --soft: #30425b;
   color-scheme: dark;
 }

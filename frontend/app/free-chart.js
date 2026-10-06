@@ -68,7 +68,8 @@ export function initFreeChart() {
     result.classList.add("hidden");
     result.replaceChildren();
     document.querySelector("#instant-success").textContent = "";
-    clearErrors();
+    const invalidFields = new Set(chartIssues(chartPayload(form)).map(issue => issue.field));
+    clearErrors(invalidFields);
   });
   form.elements.calendar_type.addEventListener("change", () => {
     const lunar = form.elements.calendar_type.value === "lunar";
@@ -79,15 +80,18 @@ export function initFreeChart() {
     form.elements.birth_time.disabled = form.elements.birth_time_unknown.checked;
     if (form.elements.birth_time_unknown.checked) form.elements.birth_time.value = "";
   });
-  function clearErrors() {
+  function clearErrors(preserveFields = new Set()) {
     for (const message of form.querySelectorAll("[data-chart-error]")) {
+      if (preserveFields.has(message.dataset.chartError)) continue;
       const field = form.elements[message.dataset.chartError];
       const describedBy = (field.getAttribute("aria-describedby") || "").split(/\s+/).filter(id => id && id !== message.id);
       if (describedBy.length) field.setAttribute("aria-describedby", describedBy.join(" "));
       else field.removeAttribute("aria-describedby");
       field.removeAttribute("aria-invalid");
+      error.querySelector(`[data-chart-error-summary="${message.dataset.chartError}"]`)?.remove();
       message.remove();
     }
+    if (form.querySelector("[data-chart-error]")) return;
     error.classList.add("hidden");
     error.replaceChildren();
   }
@@ -111,6 +115,7 @@ export function initFreeChart() {
         link.textContent = issue.message;
         link.addEventListener("click", event => { event.preventDefault(); field.focus(); });
         const item = document.createElement("li");
+        item.dataset.chartErrorSummary = issue.field;
         item.append(link);
         list.append(item);
       }

@@ -1,0 +1,13 @@
+{
+  "name": "yeoul-saju",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "test:python": "python3 -m pytest -q",
+    "test:all": "npm test && npm run test:python",
+    "check": "node --check frontend/app/free-chart.js && node --check frontend/app/main.js && node --check frontend/app/home-motion.js && node --check frontend/app/domain.js && node --check frontend/assets/js/api.js && node --check frontend/assets/js/storage.js && node --check frontend/assets/js/privacy.js && node --check frontend/assets/js/report-preview.js && node --check frontend/assets/js/main.js && node --check frontend/assets/js/input.js && node --check frontend/assets/js/result.js && python3 -m compileall -q backend/app scripts serve_frontend.py && bash -n start_servers.sh",
+    "build:seo": "python3 scripts/build_seo.py --include-app",
+    "content:draft": "python3 scripts/growth_pipeline.py"
+  }
+}

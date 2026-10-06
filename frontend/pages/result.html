@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../assets/js/file-protocol-guard.js"></script>
+    <title>나의 결 리포트</title>
+    <meta name="description" content="삶의 언어로 풀어낸 나만의 나의 결 리포트를 편안하게 읽어보세요.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+    <link rel="stylesheet" href="../assets/css/result.css?v=20260907-reader">
+    <link rel="stylesheet" href="../assets/css/ui-refresh.css?v=20260908-3">
+</head>
+
+<body data-page="result">
+    <a class="skip-link" href="#mainContent">리포트 본문으로 바로가기</a>
+    <header class="result-header">
+        <div class="header-content">
+            <a class="result-logo" href="index.html" aria-label="나의 결 홈으로 이동">
+                <span class="brand-mark" aria-hidden="true">결</span>
+                <span>나의 결</span>
+            </a>
+            <div class="header-controls" aria-label="리포트 도구">
+
+                <div class="font-controls" role="group" aria-label="본문 글자 크기">
+                    <button class="tool-button compact-tool" id="fontSizeDown" type="button" aria-label="본문 글자 작게">A−</button>
+                    <button class="tool-button compact-tool" id="fontSizeUp" type="button" aria-label="본문 글자 크게">A＋</button>
+                </div>
+                <button class="tool-button audio-header-btn" id="headerAudiobookBtn" type="button" aria-label="오디오북으로 듣기">
+                    <span aria-hidden="true">♫</span><span class="tool-label">오디오북</span>
+                </button>
+                <button class="tool-button compact-tool" id="resultThemeToggle" type="button" aria-label="야간 읽기 모드로 전환">
+                    <span id="resultThemeIcon" aria-hidden="true">◐</span>
+                </button>
+                <button class="tool-button" id="deleteReportBtn" type="button" aria-label="리포트 및 입력 정보 삭제">삭제</button>
+                <button class="tool-button primary-tool" id="shareBtn" type="button">
+                    <span aria-hidden="true">↗</span><span class="tool-label">공유·저장</span>
+                </button>
+            </div>
+        </div>
+        <div class="reading-progress" aria-hidden="true">
+            <span id="readingProgressBar"></span>
+        </div>
+    </header>
+
+    <main class="result-main" id="mainContent" tabindex="-1">
+        <section class="loading-container" id="loadingContainer" aria-live="polite" aria-busy="true">
+            <div class="loading-card">
+                <div class="loading-book" aria-hidden="true"><i></i><i></i><i></i></div>
+                <p class="state-eyebrow">당신만을 위한 한 권</p>
+                <h1>리포트를 차분히 엮고 있습니다.</h1>
+                <p>기질, 관계, 선택의 흐름을 삶의 언어로 옮기는 중입니다.</p>
+                <div class="loading-progress"><span id="progressBar"></span></div>
+                <strong class="loading-status" id="loadingStatus">분석 결과를 확인하는 중입니다.</strong>
+            </div>
+        </section>
+
+        <section class="analysis-container hidden" id="analysisContainer">
+            <div class="generation-warning hidden" id="generationWarning" role="status"></div>
+
+            <!-- 3단 리포트 스텝 탭바 -->
+            <nav class="report-step-nav" id="reportStepNav" aria-label="리포트 단계 선택">
+                <div class="step-nav-inner" role="tablist" aria-label="리포트 단계">
+                    <button type="button" class="step-tab-btn active" id="stepTab1" data-step="1" role="tab" aria-selected="true" aria-controls="stepPage1">
+                        <span class="step-num">01</span>
+                        <span class="step-title">무료 핵심 요약</span>
+                    </button>
+                    <button type="button" class="step-tab-btn premium-step-tab" id="stepTab2" data-step="2" role="tab" aria-selected="false" aria-controls="stepPage2">
+                        <span class="step-num">02</span>
+                        <span class="step-title">상세 리포트</span>
+                        <span class="premium-tab-state" aria-hidden="true">잠김</span>
+                    </button>
+                    <button type="button" class="step-tab-btn premium-step-tab" id="stepTab3" data-step="3" role="tab" aria-selected="false" aria-controls="stepPage3">
+                        <span class="step-num">03</span>
+                        <span class="step-title">한눈에 정리하기</span>
+                        <span class="premium-tab-state" aria-hidden="true">잠김</span>
+                    </button>
+                </div>
+            </nav>
+
+            <div class="report-step-pages">
+                <!-- STEP 1: 핵심 요약 & 사주 명식 -->
+                <div class="step-page-section" id="stepPage1" data-step="1" role="tabpanel" aria-labelledby="stepTab1">
+                    <section class="result-hero" aria-labelledby="reportTitle">
+                        <div class="result-hero-inner">
+                            <div class="hero-heading">
+                                <p class="hero-eyebrow">나를 읽는 한 권</p>
+                                <div class="user-greeting" id="heroUserGreeting">당신을 읽는 이야기</div>
+                                <h1 class="report-title" id="reportTitle">나라는 사람을 읽는 시간</h1>
+                                <p class="report-meta" id="heroDate">분석 정보를 불러오는 중입니다.</p>
+                                <button class="read-report-button" id="readReportButton" type="button">
+                                    무료 핵심 요약 보기 <span aria-hidden="true">↓</span>
+                                </button>
+                            </div>
+
+                            <div class="summary-panel" aria-label="리포트 핵심 요약">
+                                <article class="summary-card">
+                                    <div><p>나의 일간</p><strong id="cardIdentity">명식을 계산 중입니다.</strong></div>
+                                </article>
+                                <article class="summary-card">
+                                    <div><p id="cardRelationshipTitle">현재 핵심 방향</p><strong id="cardRelationship">분석 중입니다.</strong></div>
+                                </article>
+                                <article class="summary-card">
+                                    <div><p>현재 대운 · 세운</p><strong id="cardWealth">운의 흐름을 계산 중입니다.</strong></div>
+                                </article>
+                                <article class="summary-card special-card">
+                                    <div><p>가까운 점검일</p><strong id="cardSpecialDate">일진을 계산 중입니다.</strong></div>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 지금 나를 읽는 핵심 요약 (무료 핵심 요약) -->
+                    <section class="quick-summary-panel hidden" id="quickSummaryPanel" aria-labelledby="quickSummaryTitle">
+                        <header class="quick-summary-heading">
+                            <div>
+                                <p>무료 미리보기 · 핵심 요약 일부</p>
+                                <h2 id="quickSummaryTitle">지금 나를 읽는 핵심 요약</h2>
+                            </div>
+                            <span class="confidence-badge" id="quickConfidence">입력 기준 확인 중</span>
+                        </header>
+
+                        <!-- 1. 날카롭고 개인화된 3단락 무료 핵심 요약 -->
+                        <article class="sharp-summary-card">
+                            <h3 class="sharp-summary-headline" id="sharpSummaryHeadline">
+                                시작은 빠르지만, 끝을 앞두고 기준이 흔들릴 수 있습니다.
+                            </h3>
+                            <p class="sharp-summary-body" id="sharpSummaryBody">
+                                <span id="quickUserName">사용자</span> 님은 새로운 기회와 아이디어를 빠르게 포착하고, 남들이 보지 못한 가능성을 먼저 발견하는 편입니다. 다만 일이 반복·조율·마무리 단계로 넘어가면 “더 나은 선택이 있지 않을까”라는 생각이 커져, 이미 잡은 흐름이 늦어질 수 있습니다.
+                            </p>
+                            <p class="sharp-summary-focus" id="sharpSummaryFocus">
+                                지금 필요한 것은 더 좋은 기회를 찾는 일이 아니라, 내 기준을 세우고 끝낼 일 하나를 고르는 일입니다.
+                            </p>
+                            <!-- 하위 호환용 데이터 홀더 -->
+                            <div class="direct-answer-meta hidden" aria-hidden="true">
+                                <p id="quickDirectAnswer"></p>
+                                <strong id="quickAnswerWindow"></strong>
+                                <ul id="quickGoodSignals"></ul>
+                                <ul id="quickDecisionChangers"></ul>
+                                <p id="quickOneLine"></p>
+                                <p id="quickLuck"></p>
+                            </div>
+                        </article>
+
+                        <!-- 2. 현실에서 보이는 신호 3대 카드 (무료 공개 내용 + 상세 리포트 잠금 티징) -->
+                        <div class="sharp-trait-grid" role="region" aria-label="현실에서 보이는 신호 3개">
+                            <article class="sharp-trait-card strength-card">
+                                <div class="sharp-card-label">
+                                    <span class="sharp-badge-icon" aria-hidden="true">＋</span>
+                                    <span>강점이 살아나는 순간</span>
+                                </div>
+                                <p class="sharp-card-public" id="sharpStrengthTitle">
+                                    새로운 일의 시작, 기획, 낯선 기회를 빠르게 읽을 때 강점이 살아납니다.
+                                </p>
+                                <button type="button" class="sharp-card-insight" id="strengthInsight">
+                                    <span class="insight-prefix">이 강점이 역효과를 낼 때도 있습니다</span>
+                                    <span class="insight-locked">어떤 상황에서 강점이 짐이 되는지</span>
+                                </button>
+                                <ul class="sharp-sub-traits hidden" id="quickStrengths"></ul>
+                            </article>
+
+                            <article class="sharp-trait-card bottleneck-card">
+                                <div class="sharp-card-label">
+                                    <span class="sharp-badge-icon" aria-hidden="true">!</span>
+                                    <span>반복되는 병목</span>
+                                </div>
+                                <p class="sharp-card-public" id="sharpBottleneckTitle">
+                                    일이 반복·조율·마무리 단계로 갈수록 흥미보다 부담이 커질 수 있습니다.
+                                </p>
+                                <button type="button" class="sharp-card-insight bottleneck-insight">
+                                    <span class="insight-prefix">반복되는 패턴을 더 자세히 살펴보세요</span>
+                                    <span class="insight-locked">왜 반복되는지 · 끊는 기준</span>
+                                </button>
+                                <ul class="sharp-sub-traits hidden" id="quickWatchouts"></ul>
+                            </article>
+
+                            <article class="sharp-trait-card task-card">
+                                <div class="sharp-card-label">
+                                    <span class="sharp-badge-icon" aria-hidden="true">→</span>
+                                    <span>지금의 90일 키워드</span>
+                                </div>
+                                <p class="sharp-card-public" id="sharpTaskTitle">
+                                    확장보다 정리, 속도보다 완료 기준이 중요한 흐름입니다.
+                                </p>
+                                <button type="button" class="sharp-card-insight task-insight">
+                                    <span class="insight-prefix">시기별 선택과 행동을 더 자세히 살펴보세요</span>
+                                    <span class="insight-locked">월별 판단 기준 · 주의 시점</span>
+                                </button>
+                            </article>
+                        </div>
+
+                        <article class="free-action-card" aria-labelledby="freeActionTitle">
+                            <div>
+                                <span>오늘의 실천</span>
+                                <h3 id="freeActionTitle">오늘 바로 해볼 작은 행동</h3>
+                            </div>
+                            <p id="freeActionText">결과를 바꾸기 쉬운 작은 행동을 정리하고 있습니다.</p>
+                        </article>
+
+                        <!-- 3. 요약 직후 고전환 유료 영역 (Premium Paywall Teaser) -->
+                        <section class="premium-teaser-banner" id="premiumTeaserSection" aria-labelledby="teaserHeadline">
+                            <div class="teaser-eyebrow">상세 리포트 체험</div>
+                            <div class="teaser-header">
+                                <h3 id="teaserHeadline">이야기를 더 깊이 읽어보세요</h3>
+                                <p id="teaserSubhead">
+                                    방금 읽은 강점과 병목은 시작입니다.<br>
+                                    <strong><span id="teaserUserName">사용자</span> 님의 패턴이 일·돈·관계에서 실제로 어떻게 반복되는지</strong>, 그리고 지금부터 90일 안에 어떤 판단이 중요한지를 상세 리포트에서 확인할 수 있습니다.
+                                </p>
+                            </div>
+
+                            <div class="teaser-curiosity-list">
+                                <div class="curiosity-item curiosity-clickable" id="curiosityBottleneck" role="button" tabindex="0" aria-label="병목 원인 챕터로 이동">
+                                    
+                                    <div>
+                                        <strong>반복되는 고민의 조건과 선택 기준</strong>
+                                        <p>같은 기질이 어떤 상황에서는 힘이 되고, 어떤 상황에서는 부담이 되는지</p>
+                                    </div>
+                                    <span class="curiosity-arrow" aria-hidden="true">→</span>
+                                </div>
+                                <div class="curiosity-item curiosity-clickable" id="curiosityStrength" role="button" tabindex="0" aria-label="강점 성과 챕터로 이동">
+                                    
+                                    <div>
+                                        <strong>나의 강점이 다르게 드러나는 순간</strong>
+                                        <p>잘하는 일과 편안한 일의 차이, 기질이 성과로 이어지는 조건</p>
+                                    </div>
+                                    <span class="curiosity-arrow" aria-hidden="true">→</span>
+                                </div>
+                                <div class="curiosity-item curiosity-clickable" id="curiosityTask" role="button" tabindex="0" aria-label="90일 타이밍 챕터로 이동">
+                                    
+                                    <div>
+                                        <strong>앞으로 90일, 나에게 맞는 선택의 흐름</strong>
+                                        <p>월별 판단 기준과 행동 체크리스트 — 날짜별로 정리된 실행 가이드</p>
+                                    </div>
+                                    <span class="curiosity-arrow" aria-hidden="true">→</span>
+                                </div>
+                            </div>
+
+                            <div class="teaser-cta-wrap">
+                                <div class="teaser-section-count" id="lockedSectionCount">전체 심층 해설을 확인하는 중입니다</div>
+                                <button type="button" class="teaser-cta-btn" id="teaserUnlockCtaBtn">
+                                    <span>전체 리포트 체험하기</span>
+                                    <span class="cta-arrow" aria-hidden="true">→</span>
+                                </button>
+                                <p class="teaser-price hidden" id="teaserPrice"></p>
+                                <p class="teaser-cta-note" id="teaserCtaNote">현재 체험용으로 제공됩니다. 실제 결제는 진행되지 않습니다.</p>
+                                <p class="teaser-status" id="teaserStatus" role="status" aria-live="polite"></p>
+                            </div>
+                        </section>
+                    </section>
+
+                    <!-- 무료 결과의 계산 신뢰를 확인하는 간단 명식 -->
+                    <section class="saju-basis-panel hidden" id="sajuBasisPanel" aria-labelledby="sajuBasisTitle">
+                        <header class="saju-basis-heading">
+                            <div>
+                                <p>입력 정보를 바탕으로 계산한 명식</p>
+                                <h2 id="sajuBasisTitle">사주 풀이의 기준 명식</h2>
+                            </div>
+                            <strong id="dayMasterSummary">명식을 계산하는 중입니다.</strong>
+                        </header>
+                        <div class="pillar-grid" id="pillarGrid" aria-label="사주 네 기둥"></div>
+                        <div class="element-balance" id="elementBalance" aria-label="오행 단순 분포"></div>
+                        <details class="saju-standard-details">
+                            <summary>계산 기준과 해석 범위 자세히 보기</summary>
+                            <p class="saju-standard-note" id="sajuStandardNote"></p>
+                        </details>
+                    </section>
+                </div>
+
+                <!-- STEP 2: 상세 리포트 -->
+                <div class="step-page-section hidden" id="stepPage2" data-step="2" role="tabpanel" aria-labelledby="stepTab2">
+                    <!-- 목차 네비게이션 컨테이너 -->
+                    <div class="chapter-tabs-container" id="chapterTabsContainer">
+                        <div class="chapter-tabs-heading">
+                <div class="view-mode-toggle header-view-mode hidden" role="group" aria-label="보기 방식 선택">
+                    <button type="button" class="view-mode-btn active" id="viewModeAllBtn" data-view-mode="all" aria-pressed="true" title="한눈에 스크롤">
+                        <span class="view-mode-text">스크롤</span>
+                    </button>
+                    <button type="button" class="view-mode-btn" id="viewModePageBtn" data-view-mode="page" aria-pressed="false" title="한 장씩 보기">
+                        <span class="view-mode-text">한장씩</span>
+                    </button>
+                </div>
+
+                        </div>
+                        <nav class="chapter-tabs" id="chapterTabs" aria-label="리포트 목차"></nav>
+                        <label class="section-jump-label" for="sectionJumpSelect" id="sectionJumpContainer">
+                            <span>세부 목차</span>
+                            <select id="sectionJumpSelect" aria-label="읽을 절 바로가기"></select>
+                        </label>
+                    </div>
+
+                    <section class="analysis-content" id="analysisContent" aria-label="분석 리포트 본문">
+                        <div class="all-sections-viewer" id="allSectionsViewer" aria-label="상세 해석 전체보기"></div>
+
+
+                        <div class="book-viewer hidden" id="bookViewer">
+                            <article class="book-page" id="bookPage" aria-live="polite">
+                                <header class="page-header">
+                                    <span class="chapter-label" id="pageChapter">1장</span>
+                                    <h2 class="section-title" id="pageTitle">분석 결과를 불러오는 중입니다.</h2>
+                                </header>
+                                <div class="page-ornament" aria-hidden="true"><span>木</span><span>火</span><span>土</span><span>金</span><span>水</span></div>
+                                <div class="page-body" id="pageContent">
+                                    <p>잠시만 기다려주세요.</p>
+                                </div>
+                            </article>
+                            <nav class="page-controls" aria-label="분석 섹션 이동">
+                                <button class="page-nav" id="previousPageButton" type="button"><span aria-hidden="true">←</span> 이전 이야기</button>
+                                <div class="page-meta" aria-live="polite">
+                                    <span class="page-number" id="pageNumber">1 / 1</span>
+                                    <span class="page-chapter" id="pageChapterMeta">1장</span>
+                                </div>
+                                <button class="page-nav next-nav" id="nextPageButton" type="button">다음 이야기 <span aria-hidden="true">→</span></button>
+                            </nav>
+                        </div>
+                    </section>
+
+                    <div class="step-page-footer dual-actions">
+                        <button type="button" class="step-prev-cta" id="step2PrevBtn">
+                            <span class="step-cta-sub">이전 단계</span>
+                            <span class="step-cta-main">← 01. 무료 핵심 요약</span>
+                        </button>
+                        <button type="button" class="step-next-cta" id="step2NextBtn">
+                            <span class="step-cta-sub">다음 단계로 이동</span>
+                            <span class="step-cta-main">03. 한눈에 정리하기 →</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: 결제 후 사용하는 한눈에 정리하기 -->
+                <div class="step-page-section hidden" id="stepPage3" data-step="3" role="tabpanel" aria-labelledby="stepTab3">
+                    <section class="practical-report" id="practicalReport" aria-labelledby="practicalReportTitle">
+                        <header class="practical-heading">
+                            <div>
+                                <p>해석을 일상으로 옮기는 실천 계획</p>
+                                <h2 id="practicalReportTitle" tabindex="-1">나의 90일 실천 계획</h2>
+                            </div>
+                            <p>긴 이야기를 다시 읽지 않아도 판단과 행동에 바로 쓸 수 있도록 압축했습니다.</p>
+                        </header>
+
+                        <section class="action-section" aria-labelledby="actionCardsTitle">
+                            <div class="section-mini-heading">
+                                <div><h3 id="actionCardsTitle">오늘·이번 주·이번 달 실행 체크리스트</h3></div>
+                                <p>카드 한 장만 골라 시작하고 완료 여부를 표시해보세요.</p>
+                            </div>
+                            <div class="action-card-grid" id="actionCards"></div>
+                        </section>
+
+                        <section class="monthly-flow-section" aria-labelledby="monthlyFlowTitle">
+                            <div class="monthly-flow-heading">
+                                <div>
+                                    
+                                    <h3 id="monthlyFlowTitle">12개월 흐름과 중요한 3개월</h3>
+                                </div>
+                                <p>절기(입절 시각) 기준으로 계산한 12개월 흐름입니다.</p>
+                            </div>
+                            <div class="monthly-flow-list" id="monthlyFlowList" role="list"></div>
+                            <details class="profile-details" id="remainingMonths" hidden>
+                                <summary>이후 9개월 흐름 더 보기</summary>
+                                <div class="monthly-flow-list" id="monthlyFlowMore" role="list"></div>
+                            </details>
+                        </section>
+
+
+
+                        <details class="profile-details"><summary>나의 유형과 오행 분포 살펴보기</summary>
+                        <div class="practical-grid">
+                            <article class="type-profile-card">
+                                <div class="card-kicker"><span>TYPE</span><small>직관적인 유형 레이블</small></div>
+                                <div class="type-seal" aria-hidden="true">型</div>
+                                <p class="type-owner" id="typeOwner">나의 결 유형</p>
+                                <h3 id="typeLabel">유형을 정리하는 중입니다.</h3>
+                                <p class="type-tagline" id="typeTagline"></p>
+                                <div class="trait-list" id="typeTraits" aria-label="핵심 특성"></div>
+                            </article>
+
+                            <article class="visual-chart-card">
+                                <div class="card-kicker"><span>CHART</span><small>한눈에 보이는 비주얼 차트</small></div>
+                                <h3>오행의 보이는 분포와 월령</h3>
+                                <div class="profile-chart" id="profileChart" role="img" aria-label="오행의 보이는 글자 수와 월령"></div>
+                                <p class="chart-note" id="profileChartNote"></p>
+                            </article>
+                        </div>
+
+                        </details>
+
+                        <article class="social-profile-card" aria-labelledby="socialProfileTitle">
+                            <div class="social-card-preview">
+                                <div class="social-profile-top">
+                                    <span class="social-avatar" aria-hidden="true">결</span>
+                                    <div><small>나의 결 프로필</small><strong id="socialHeadline">나의 결 프로필</strong></div>
+                                </div>
+                                <p id="socialProfileTitle" class="social-summary"></p>
+                                <p class="social-tags" id="socialTags"></p>
+                            </div>
+                            <div class="social-card-copy">
+                                <p>공유용 프로필</p>
+                                <h3>나를 설명하는 문장을 가볍게 나눠보세요</h3>
+                                <span>개인정보 없이 유형과 핵심 문장만 담았습니다.</span>
+                                <div class="social-actions">
+                                    <button type="button" id="copyProfileButton">프로필 문구 복사</button>
+                                    <button type="button" id="saveProfileImageButton">프로필 카드 저장</button>
+                                </div>
+                                <p class="copy-feedback" id="profileCopyFeedback" role="status" aria-live="polite"></p>
+                            </div>
+                        </article>
+                    </section>
+
+                    <section class="interpretation-feedback report-feedback" aria-labelledby="interpretationFeedbackTitle">
+                        <div>
+                            <span>읽은 뒤 확인하기</span>
+                            <h2 id="interpretationFeedbackTitle">리포트를 읽고 난 뒤, 나와 얼마나 닮았나요?</h2>
+                            <p>맞지 않은 부분도 중요한 정보입니다. 다음 해석에서 무엇을 더 확인할지 편하게 남겨주세요.</p>
+                        </div>
+                        <div class="feedback-buttons" role="group" aria-label="해석 체감 선택">
+                            <button type="button" data-report-feedback="match" aria-pressed="false">대체로 맞아요</button>
+                            <button type="button" data-report-feedback="different" aria-pressed="false">나와 달라요</button>
+                            <button type="button" data-report-feedback="unsure" aria-pressed="false">아직 모르겠어요</button>
+                        </div>
+                        <ul class="verification-question-list" id="verificationQuestionList"></ul>
+                        <p class="feedback-status" id="feedbackStatus" role="status" aria-live="polite"></p>
+                    </section>
+
+                    <section class="result-closing">
+                        <div>
+                            <p>책을 덮은 뒤에도 남는 문장</p>
+                            <h2>답을 정하기보다 나를 이해하는 방향을 찾으세요</h2>
+                        </div>
+                        <a href="input.html">새로운 리포트 만들기 <span aria-hidden="true">→</span></a>
+                    </section>
+
+                    <div class="step-page-footer dual-actions">
+                        <button type="button" class="step-prev-cta" id="step3PrevBtn">
+                            <span class="step-cta-sub">이전 단계</span>
+                            <span class="step-cta-main">← 02. 상세 리포트 다시보기</span>
+                        </button>
+                        <button type="button" class="step-next-cta" id="step3TopBtn">
+                            <span class="step-cta-sub">처음으로</span>
+                            <span class="step-cta-main">맨 위로 이동 ↑</span>
+                        </button>
+                    </div>
+
+                    <footer class="result-footer">
+                        <a class="result-logo footer-logo" href="index.html"><span class="brand-mark" aria-hidden="true">결</span><span>나의 결</span></a>
+                        <p>사주는 삶의 방향을 관찰하는 참고 자료이며 미래를 단정하지 않습니다.</p>
+                        <p>© 2026 나의 결</p>
+                    </footer>
+                </div>
+            </div>
+        </section>
+
+        <section class="error-container hidden" id="errorContainer" aria-live="assertive">
+            <div class="error-content">
+                <span class="error-seal" aria-hidden="true">!</span>
+                <p class="state-eyebrow">잠시 멈춤</p>
+                <h1>리포트를 불러오지 못했습니다.</h1>
+                <p id="errorMessage">잠시 후 다시 시도해주세요.</p>
+                <div class="error-actions">
+                    <button class="retry-button" id="resultRetryButton" type="button">다시 시도</button>
+                    <a href="input.html" class="home-button">정보 입력으로 돌아가기</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay" id="shareModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle" tabindex="-1">
+            <div class="modal-header">
+                <div>
+                    <p>나의 리포트 소장 & 나누기</p>
+                    <h2 id="shareModalTitle">공유 및 저장</h2>
+                </div>
+                <button class="modal-close" id="closeShareModal" type="button" aria-label="공유 창 닫기">×</button>
+            </div>
+            <div class="modal-body">
+                <p>리포트를 원하는 형식으로 다운로드하거나 SNS 요약본으로 공유할 수 있습니다.</p>
+                <div class="share-options">
+                    <button class="share-option primary-share" id="downloadBookReportBtn" type="button"><span aria-hidden="true">↓</span> 도서형 전체 리포트 다운로드 (HTML)</button>
+                    <button class="share-option" id="saveImageBtn" type="button"><span aria-hidden="true">↓</span> SNS 요약 카드 저장 (PNG)</button>
+                    <button class="share-option" id="copyAnonymousProfileBtn" type="button"><span aria-hidden="true">↗</span> 텍스트 요약 복사</button>
+                    <p class="field-help">익명 공유에는 오행 합계와 고정 설명만 포함됩니다. 이름·출생 정보·고민·연인 정보·리포트 본문은 제외됩니다.</p>
+                    <button class="share-option" id="downloadAnonymousReportBtn" type="button"><span aria-hidden="true">↓</span> 익명 요약 다운로드 (HTML)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 플로팅 오디오북 미니 플레이어 -->
+    <div class="audiobook-player-bar hidden" id="audiobookPlayer" role="region" aria-label="오디오북 플레이어">
+        <div class="audio-player-inner">
+            <div class="audio-track-info">
+                <div class="audio-wave-icon" id="audioWaveAnim" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                <div class="audio-text-meta">
+                    <span class="audio-badge">AUDIOBOOK</span>
+                    <strong class="audio-track-title" id="audioTrackTitle">1. 내 안의 작동 원리</strong>
+                </div>
+            </div>
+            <div class="audio-controls">
+                <button type="button" class="audio-ctrl-btn" id="audioPrevTrackBtn" aria-label="이전 절 낭독">⏮</button>
+                <button type="button" class="audio-ctrl-btn play-pause" id="audioPlayPauseBtn" aria-label="오디오 재생 또는 일시정지">
+                    <span id="audioPlayIcon" aria-hidden="true">▶</span>
+                </button>
+                <button type="button" class="audio-ctrl-btn" id="audioNextTrackBtn" aria-label="다음 절 낭독">⏭</button>
+                <button type="button" class="audio-speed-btn" id="audioSpeedBtn" aria-label="재생 속도 조절">1.0x</button>
+                <button type="button" class="audio-close-btn" id="audioCloseBtn" aria-label="오디오북 닫기">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../api-config.js"></script>
+    <script type="module" src="../assets/js/result.js?v=20260908-3"></script>
+</body>
+
+</html>

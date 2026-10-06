@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../assets/js/file-protocol-guard.js"></script>
+  <title>개인정보 이용 안내 | 나의 결</title>
+  <meta name="description" content="나의 결 리포트 생성 과정에서 수집·이용되는 정보와 처리 방식을 확인하세요." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+  <link rel="stylesheet" href="../assets/css/privacy.css?v=20260813-1" />
+  <link rel="stylesheet" href="../assets/css/ui-refresh.css?v=20260908-3" />
+</head>
+
+<body data-page="privacy">
+  <a class="skip-link" href="#privacyContent">본문으로 바로가기</a>
+
+  <header class="privacy-header">
+    <div class="header-inner">
+      <a class="privacy-logo" href="index.html" aria-label="나의 결 홈으로 이동">
+        <span class="brand-mark" aria-hidden="true">결</span>
+        <span>나의 결</span>
+      </a>
+      <span class="header-title">개인정보 안내</span>
+      <a class="back-link" href="input.html" aria-label="입력 화면으로 돌아가기">
+        <span aria-hidden="true">←</span>
+        <span>입력 화면으로</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="privacyContent">
+    <section class="privacy-hero" aria-labelledby="privacyTitle">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">시작 전 개인정보 안내</p>
+          <h1 id="privacyTitle">당신의 정보,<br>어디에 쓰이고 언제 사라질까요?</h1>
+          <p class="hero-description">
+            이 안내는 사주 리포트를 만들 때 입력 정보가 어떻게 분석되고 처리되는지
+            실제 서비스 흐름에 맞춰 설명합니다.
+          </p>
+          <div class="hero-meta" aria-label="안내 문서 정보">
+            <span>처리 기준 2026. 9. 7.</span>
+            <span>동의 버전 2026-09-07</span>
+          </div>
+          <a class="hero-scroll-cue" href="#summary">핵심 안내부터 확인하기 <span aria-hidden="true">↓</span></a>
+        </div>
+
+      </div>
+    </section>
+
+    <div class="privacy-layout">
+      <aside class="privacy-nav" aria-label="개인정보 안내 목차">
+        <p>안내 목차</p>
+        <nav>
+          <a href="#summary">한눈에 보기</a>
+          <a href="#collection">수집하는 정보</a>
+          <a href="#processing">이용과 전달</a>
+          <a href="#retention">보관과 삭제</a>
+          <a href="#rights">동의와 권리</a>
+          <a href="#safety">안전한 관리</a>
+        </nav>
+      </aside>
+
+      <article class="privacy-article">
+        <section class="policy-section summary-section" id="summary">
+          <div class="section-heading">
+            
+            <div>
+              <p>먼저 이것만 확인하세요</p>
+              <h2>한눈에 보는 핵심 안내</h2>
+            </div>
+          </div>
+
+          <div class="summary-grid">
+            <article class="summary-card">
+              <span class="card-icon" aria-hidden="true">生</span>
+              <p>왜 필요한가요?</p>
+              <h3>개인 리포트 생성</h3>
+              <span>생년월일·태어난 시간과 선택 정보를 바탕으로 맞춤 해석을 만듭니다.</span>
+            </article>
+            <article class="summary-card">
+              <span class="card-icon" aria-hidden="true">信</span>
+              <p>어디로 가나요?</p>
+              <h3>Gemini와 운영 알림</h3>
+              <span>동의한 입력 정보는 AI 분석에 사용됩니다. 선택한 경우 운영자에게 작업 번호만 알립니다.</span>
+            </article>
+            <article class="summary-card">
+              <span class="card-icon" aria-hidden="true">止</span>
+              <p>거절할 수 있나요?</p>
+              <h3>동의하지 않을 권리</h3>
+              <span>분석에 필요한 개인정보 처리를 거절하면 리포트를 만들 수 없습니다. 운영 알림은 선택이며 거절해도 분석할 수 있습니다.</span>
+            </article>
+          </div>
+
+          <div class="plain-notice">
+            <strong>광고나 판매 목적으로 사용하지 않습니다.</strong>
+            <p>입력 정보는 리포트 생성과 결과 표시에 사용합니다. 선택적 운영 알림에는 작업 번호만 포함하며 입력 정보와 조회용 비밀 토큰은 보내지 않습니다.</p>
+          </div>
+        </section>
+
+        <section class="policy-section" id="collection">
+          <div class="section-heading">
+            
+            <div>
+              
+              <h2>어떤 정보를 수집하나요?</h2>
+            </div>
+          </div>
+
+          <div class="detail-list">
+            <div class="detail-row">
+              <div><span class="required-badge">필수</span><h3>기본 정보</h3></div>
+              <p>이름 또는 닉네임, 생년월일, 양력·음력 구분, 태어난 시간 또는 시간 모름 여부, 성별, 현재 관계 상태</p>
+            </div>
+            <div class="detail-row">
+              <div><span class="optional-badge">선택</span><h3>심화 정보</h3></div>
+              <p>MBTI, 지금 가장 궁금한 고민, 연인 이름·성별·생년월일·태어난 시간·MBTI. 입력한 경우에만 추가 해석과 관계 분석에 사용합니다.</p>
+            </div>
+            <div class="detail-row">
+              <div><span class="generated-badge">생성</span><h3>이용 중 생기는 정보</h3></div>
+              <p>분석 작업 번호, 분석 결과와 요약, 특별한 흐름이 보이는 날짜, 생성 시각, 이메일 발송 상태</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="policy-section" id="processing">
+          <div class="section-heading">
+            
+            <div>
+              
+              <h2>정보는 어떻게 이용되고 전달되나요?</h2>
+            </div>
+          </div>
+
+          <div class="flow-card" aria-label="개인정보 처리 흐름">
+            <div class="flow-start"><span>01</span><strong>정보 입력</strong><small>사용자가 직접 작성</small></div>
+            <i aria-hidden="true">→</i>
+            <div><span>02</span><strong>Gemini 분석</strong><small>맞춤 리포트 생성</small></div>
+            <i aria-hidden="true">→</i>
+            <div><span>03</span><strong>리포트 표시</strong><small>브라우저에서 열람</small></div>
+            <b aria-hidden="true">＋</b>
+            <div class="flow-email"><span>04</span><strong>운영 알림</strong><small>선택 시 작업 번호만 전송</small></div>
+          </div>
+
+          <div class="provider-grid">
+            <article>
+              <p class="provider-label">AI 분석</p>
+              <h3>Google Gemini API</h3>
+              <p>입력 정보는 개인화된 본문을 만들기 위한 프롬프트에 포함됩니다. 이 앱은 분석 요청을 보낼 때 <code>store: false</code>로 설정해 상호작용 리소스를 저장하지 않도록 요청합니다.</p>
+              <small>다만 Google 시스템에서의 처리 방식과 보관은 Google의 해당 서비스 약관 및 개인정보 정책이 적용됩니다.</small>
+            </article>
+            <article>
+              <p class="provider-label">운영 알림</p>
+              <h3>운영 알림 이메일</h3>
+              <p>운영 알림을 선택한 경우에만 작업 번호와 접수 사실을 설정된 운영자 이메일 주소로 보냅니다. 이름, 생년월일, 고민, 연인 정보와 조회용 비밀 토큰은 메일에 포함하지 않습니다.</p>
+              <small>사용자에게 결과 메일을 보내거나 마케팅 메일을 발송하는 기능은 아닙니다.</small>
+            </article>
+          </div>
+        </section>
+
+        <section class="policy-section" id="retention">
+          <div class="section-heading">
+            
+            <div>
+              
+              <h2>얼마나 보관하고, 어떻게 삭제하나요?</h2>
+            </div>
+          </div>
+
+          <div class="retention-list">
+            <article>
+              <span>서버 작업</span>
+              <h3>최대 24시간</h3>
+              <p>분석 작업과 결과는 생성 후 최대 24시간 동안 조회할 수 있습니다. 만료된 사본은 1분 주기로 정리하며, 서버 재시작이나 리포트 삭제 시 더 먼저 사라질 수 있습니다.</p>
+            </article>
+            <article>
+              <span>현재 탭</span>
+              <h3>브라우저 세션 동안</h3>
+              <p>기록 저장을 선택하지 않아도 현재 탭의 세션 저장소에 입력값, 결과와 조회 권한을 임시 보관합니다. 입력값과 조회 권한은 최대 24시간 동안 사용하며 탭을 닫거나 전체 정보를 삭제하면 제거됩니다.</p>
+            </article>
+            <article>
+              <span>이 기기 기록</span>
+              <h3>선택 시 최대 30일</h3>
+              <p>“분석 기록 저장”을 선택하면 결과와 기록 요약을 이 브라우저에 최대 12건 저장합니다. 저장 후 30일이 지난 기록은 다음 이용 시 제거합니다. 기록 삭제와 리포트 삭제는 입력 사본도 지웁니다. 브라우저를 닫아둔 동안 저장소를 자동 정리할 수는 없습니다.</p>
+            </article>
+            <article class="retention-warning">
+              <span>운영 알림</span>
+              <h3>운영자가 삭제할 때까지</h3>
+              <p>알림 메일은 자동 삭제되지 않습니다. 새 알림에는 작업 번호만 포함되며 그 번호만으로는 결과를 조회할 수 없습니다. 이전에 발송된 개인정보 포함 메일은 운영자에게 별도 삭제를 요청해주세요.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="policy-section" id="rights">
+          <div class="section-heading">
+            
+            <div>
+              
+              <h2>동의를 거절하거나 철회할 수 있어요.</h2>
+            </div>
+          </div>
+
+          <div class="rights-card">
+            <ol>
+              <li><span>1</span><div><strong>분석 전</strong><p>필수 동의란을 선택하지 않으면 정보가 전송되지 않습니다. 다만 리포트 생성은 진행할 수 없습니다.</p></div></li>
+              <li><span>2</span><div><strong>분석 후</strong><p>기록 메뉴나 리포트의 삭제 버튼으로 기기 사본과 조회 권한이 남아 있는 서버 사본을 삭제할 수 있습니다. 서버 연결 실패 시 별도로 안내하며 해당 사본은 생성 후 24시간에 만료됩니다. 운영 알림 메일은 운영자에게 삭제를 요청해주세요.</p></div></li>
+              <li><span>3</span><div><strong>권리 행사</strong><p>열람·정정·삭제·처리정지를 원하면 이 서비스를 제공한 운영자에게 요청해 주세요. 이미 발송된 메일은 운영자가 직접 삭제해야 합니다.</p></div></li>
+            </ol>
+          </div>
+
+          <div class="minor-notice">
+            <strong>만 14세 미만 이용자 안내</strong>
+            <p>만 14세 미만이라면 법정대리인의 동의와 운영자의 별도 확인 없이 개인정보를 입력하지 마세요.</p>
+          </div>
+        </section>
+
+        <section class="policy-section" id="safety">
+          <div class="section-heading">
+            
+            <div>
+              
+              <h2>정보를 안전하게 다루기 위한 기준</h2>
+            </div>
+          </div>
+
+          <ul class="safety-list">
+            <li><span>✓</span>메일 발송용 인증정보와 Gemini API 키는 화면에 노출하지 않고 서버 환경설정에서 관리합니다.</li>
+            <li><span>✓</span>외부 API와 메일 서버 연결에는 암호화된 통신을 사용합니다.</li>
+            <li><span>✓</span>현재 서비스 목적에 필요하지 않은 주민등록번호, 연락처, 주소는 수집하지 않습니다.</li>
+            <li><span>✓</span>처리 방식이 바뀌면 이 페이지의 내용과 시행일을 함께 갱신합니다.</li>
+          </ul>
+
+          <div class="official-links">
+            <p>더 알아보기</p>
+            <a href="https://www.law.go.kr/LSW/lsLawLinkInfo.do?chrClsCd=010202&lsJoLnkSeq=900079620" target="_blank" rel="noopener noreferrer">개인정보 보호법 제15조 <span aria-hidden="true">↗</span></a>
+            <a href="https://m.pipc.go.kr/np/cop/bbs/selectBoardArticle.do?bbsId=BS074&mCode=C020010000&nttId=11133" target="_blank" rel="noopener noreferrer">개인정보 처리방침 작성지침 안내 <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+
+        <section class="agreement-cta" aria-labelledby="agreementTitle">
+          <p>안내 내용을 모두 확인하셨나요?</p>
+          <h2 id="agreementTitle">동의 여부는 입력 화면에서 직접 선택해주세요.</h2>
+          <a href="input.html">입력 화면으로 돌아가기 <span aria-hidden="true">→</span></a>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="privacy-footer">
+    <p>나의 결 개인정보 이용 안내</p>
+    <span>이 문서는 현재 서비스의 실제 처리 흐름을 알기 쉽게 설명하기 위한 안내입니다.</span>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,410 @@
+/* Book page styles for Personal Operating System */
+:root {
+    --toc-width: 300px;
+    --header-height: 80px;
+    --book-primary: #2d3748;
+    --book-secondary: #4a5568;
+    --book-accent: #ed8936;
+    --book-light: #f7fafc;
+    --book-border: #e2e8f0;
+    --chapter-bg: #ffffff;
+    --toc-bg: #f8fafc;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Serif KR', serif;
+    line-height: 1.7;
+    color: var(--book-primary);
+    background-color: var(--book-light);
+    overflow-x: hidden;
+}
+
+/* Fixed header with download controls */
+.book-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--book-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 1000;
+}
+
+.book-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--book-primary);
+}
+
+.header-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.control-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--book-border);
+    border-radius: 8px;
+    background: white;
+    color: var(--book-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.control-btn:hover {
+    background: var(--book-accent);
+    color: white;
+    border-color: var(--book-accent);
+}
+
+.control-btn.primary {
+    background: var(--book-accent);
+    color: white;
+    border-color: var(--book-accent);
+}
+
+.toc-toggle {
+    display: none;
+}
+
+/* Main layout container */
+.book-container {
+    display: flex;
+    min-height: 100vh;
+    padding-top: var(--header-height);
+}
+
+/* Table of Contents */
+.toc-sidebar {
+    width: var(--toc-width);
+    background: var(--toc-bg);
+    border-right: 1px solid var(--book-border);
+    position: fixed;
+    left: 0;
+    top: var(--header-height);
+    bottom: 0;
+    overflow-y: auto;
+    padding: 2rem 1.5rem;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: transform 0.3s ease;
+}
+
+.toc-sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.toc-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--book-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--book-border);
+}
+
+.toc-chapter {
+    margin-bottom: 1.5rem;
+}
+
+.toc-chapter-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--book-secondary);
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toc-chapter-title:hover {
+    background: rgba(237, 137, 54, 0.1);
+    color: var(--book-accent);
+}
+
+.toc-chapter-title.active {
+    background: var(--book-accent);
+    color: white;
+}
+
+.toc-chapter-number {
+    background: var(--book-accent);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.toc-chapter-title.active .toc-chapter-number {
+    background: white;
+    color: var(--book-accent);
+}
+
+.toc-chapter-intro {
+    font-size: 0.8rem;
+    color: var(--book-secondary);
+    margin-left: 0.5rem;
+    margin-top: 0.25rem;
+    opacity: 0.8;
+    padding-left: 30px;
+}
+
+/* Main content area */
+.book-content {
+    margin-left: var(--toc-width);
+    flex: 1;
+    padding: 2rem;
+    max-width: 800px;
+    margin-right: auto;
+}
+
+.loading-indicator {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--book-secondary);
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--book-border);
+    border-radius: 50%;
+    border-top-color: var(--book-accent);
+    animation: spin 1s linear infinite;
+    margin-right: 1rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Chapter content styles */
+.chapter {
+    margin-bottom: 4rem;
+    background: var(--chapter-bg);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--book-border);
+}
+
+.chapter h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--book-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--book-accent);
+}
+
+.chapter h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--book-primary);
+    margin: 2rem 0 1rem 0;
+}
+
+.chapter h3 {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--book-secondary);
+    margin: 1.5rem 0 0.8rem 0;
+}
+
+.chapter p {
+    margin-bottom: 1.2rem;
+    line-height: 1.8;
+    word-break: keep-all;
+}
+
+.chapter ul {
+    margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.chapter li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.chapter strong {
+    color: var(--book-accent);
+    font-weight: 600;
+}
+
+.chapter blockquote {
+    background: var(--toc-bg);
+    border-left: 4px solid var(--book-accent);
+    margin: 1.5rem 0;
+    padding: 1rem 1.5rem;
+    font-style: italic;
+    color: var(--book-secondary);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    :root {
+        --toc-width: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .toc-toggle {
+        display: block;
+    }
+    
+    .book-header {
+        padding: 0 1rem;
+    }
+    
+    .book-title {
+        font-size: 1.1rem;
+    }
+    
+    .header-controls {
+        gap: 0.5rem;
+    }
+    
+    .control-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .toc-sidebar {
+        width: 100%;
+        max-width: 320px;
+        background: rgba(248, 250, 252, 0.98);
+        backdrop-filter: blur(10px);
+        z-index: 999;
+    }
+    
+    .book-content {
+        margin-left: 0;
+        padding: 1.5rem;
+    }
+    
+    .chapter {
+        padding: 2rem 1.5rem;
+    }
+    
+    .chapter h1 {
+        font-size: 1.6rem;
+    }
+    
+    .chapter h2 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --header-height: 70px;
+    }
+    
+    .book-header {
+        padding: 0 0.8rem;
+    }
+    
+    .book-title {
+        font-size: 1rem;
+    }
+    
+    .control-btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+    }
+    
+    .book-content {
+        padding: 1rem;
+    }
+    
+    .chapter {
+        padding: 1.5rem 1rem;
+    }
+    
+    .chapter h1 {
+        font-size: 1.4rem;
+    }
+    
+    .toc-sidebar {
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .book-header,
+    .toc-sidebar {
+        display: none;
+    }
+    
+    .book-container {
+        display: block;
+        padding-top: 0;
+    }
+    
+    .book-content {
+        margin: 0;
+        padding: 0;
+        max-width: none;
+    }
+    
+    .chapter {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: none;
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+    }
+    
+    .chapter h1 {
+        page-break-after: avoid;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.6;
+    }
+    
+    @page {
+        margin: 2cm;
+        @top-center {
+            content: "당신의 Personal OS";
+        }
+        @bottom-center {
+            content: counter(page);
+        }
+    }
+}

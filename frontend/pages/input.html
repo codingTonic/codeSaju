@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="../assets/js/file-protocol-guard.js"></script>
+  <title>사용자 정보 입력 | 나의 결</title>
+  <meta name="description" content="한 화면에서 기본 정보를 입력하고 나만의 나의 결 리포트를 만들어보세요." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable.css">
+  <link rel="stylesheet" href="../assets/css/input.css?v=20260906-2" />
+  <link rel="stylesheet" href="../assets/css/ui-refresh.css?v=20260908-3" />
+</head>
+
+<body data-page="input">
+  <a class="skip-link" href="#mainContent">입력 양식으로 바로가기</a>
+  <header class="input-header">
+    <a class="input-logo" href="index.html" aria-label="나의 결 홈으로 이동">
+      <span class="brand-mark" aria-hidden="true">결</span>
+      <span>나의 결</span>
+    </a>
+    <div class="input-progress" aria-label="진행 단계: 1 정보 입력, 2 분석, 3 리포트">
+      <strong>01</strong><small>정보 입력</small><span></span>
+      <b>02</b><small>분석</small><span></span>
+      <b>03</b><small>리포트</small>
+    </div>
+    <a class="close-link" href="index.html" aria-label="입력 페이지 닫기">닫기</a>
+  </header>
+
+  <main class="input-page" id="mainContent" tabindex="-1">
+    <aside class="input-story" aria-label="입력 안내">
+      <div class="story-copy">
+        <p>나의 이야기를 시작하며</p>
+        <h1>당신의 <span class="no-break">시간을</span><br> 들려주세요.</h1>
+        <span>생년월일과 현재의 고민을 알려주세요. 태어난 시간을 모르면 ‘시간 모름’을 선택할 수 있어요.</span>
+      </div>
+      <nav class="form-outline" aria-label="입력 항목 바로가기"><a href="#birthSection">태어난 시간</a><a href="#contextSection">지금의 나</a><a href="#consentSection">정보 이용 동의</a></nav>
+      <ul class="input-benefits">
+        <li><strong>무료 요약부터</strong>핵심 요약 일부를 먼저 확인하세요.</li>
+        <li><strong>태어난 시간을 몰라도</strong>시간 모름을 선택하면 시주 없이 분석합니다.</li>
+        <li><strong>기록 저장은 선택</strong>동의한 기록만 이 브라우저에 보관됩니다.</li>
+      </ul>
+    </aside>
+
+    <section class="input-pane" aria-labelledby="inputTitle">
+      <div class="input-content">
+        <div class="input-title-row">
+          <span class="title-seal" aria-hidden="true">生</span>
+          <div>
+            <h2 id="inputTitle">리포트에 담을 정보</h2>
+            <p>별표(*)는 필수 항목입니다. MBTI와 고민은 선택해서 입력하세요.</p>
+          </div>
+        </div>
+
+        <div class="service-status hidden" id="apiStatusNotice" role="status" aria-live="polite"></div>
+
+        <form class="user-info-form" id="userInfoForm" novalidate>
+          <div class="form-section-heading full-field" id="birthSection"><span aria-hidden="true">01</span><div><h3>태어난 시간</h3><p>명식을 계산하고 리포트에 이름을 담습니다.</p></div></div>
+          <div class="field full-field basic-name-field">
+            <label for="name">이름 <em>*</em></label>
+            <input type="text" id="name" name="name" autocomplete="nickname" aria-describedby="nameHelp" placeholder="이름 또는 닉네임" maxlength="50" required />
+            <p class="field-help" id="nameHelp">리포트 표지와 본문에서 불릴 이름을 적어주세요.</p>
+          </div>
+
+          <fieldset class="field full-field basic-birth-field">
+            <legend>생년월일 <em>*</em></legend>
+            <div class="date-row">
+              <div class="segment-control" aria-label="달력 유형">
+                <label><input type="radio" name="calendar_type" value="solar" checked><span>양력</span></label>
+                <label><input type="radio" name="calendar_type" value="lunar"><span>음력</span></label>
+              </div>
+              <input type="date" id="birth_date" name="birth_date" aria-label="생년월일" min="1900-01-01" required />
+            </div>
+            <label class="check-row compact-check leap-month-row" id="leapMonthRow" for="is_leap_month" hidden>
+              <input type="checkbox" id="is_leap_month" name="is_leap_month" />
+              <span>윤달에 태어났어요</span>
+            </label>
+          </fieldset>
+
+          <fieldset class="field full-field basic-time-field">
+            <legend>태어난 시간 <em>*</em></legend>
+            <div class="time-input-row">
+              <input type="time" id="birth_time" name="birth_time" aria-label="태어난 시간" aria-describedby="birthTimeHelp" required />
+              <span>대한민국 표준시 기준</span>
+            </div>
+            <label class="check-row" for="birth_time_unknown">
+              <input type="checkbox" id="birth_time_unknown" />
+              <span>태어난 시간을 잘 모르겠어요</span>
+            </label>
+            <p class="field-help" id="birthTimeHelp">대한민국 표준시 기준입니다. 시간 모름을 선택하면 시주 없이 분석합니다.</p>
+          </fieldset>
+
+          <div class="form-section-heading full-field" id="contextSection"><span aria-hidden="true">02</span><div><h3>지금의 나</h3><p>현재 상황을 알려주시면 해석에 함께 반영합니다.</p></div></div>
+          <fieldset class="field half-field basic-gender-field">
+            <legend>성별 <em>*</em></legend>
+            <div class="segment-control gender-control" aria-label="성별">
+              <label><input type="radio" name="gender" value="male" required><span>남성</span></label>
+              <label><input type="radio" name="gender" value="female" required><span>여성</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field half-field basic-relationship-field">
+            <label for="relationship_status">현재 관계 상태 <em>*</em></label>
+            <select id="relationship_status" name="relationship_status" required
+              aria-controls="partnerInfoSection" aria-expanded="false">
+              <option value="single">솔로</option>
+              <option value="dating">연애 중</option>
+              <option value="married">기혼</option>
+            </select>
+          </div>
+
+          <div class="field half-field basic-mbti-field">
+            <label for="mbti">MBTI <span>선택</span></label>
+            <select id="mbti" name="mbti">
+              <option value="">선택하지 않음</option>
+              <option value="ISTJ">ISTJ</option>
+              <option value="ISFJ">ISFJ</option>
+              <option value="INFJ">INFJ</option>
+              <option value="INTJ">INTJ</option>
+              <option value="ISTP">ISTP</option>
+              <option value="ISFP">ISFP</option>
+              <option value="INFP">INFP</option>
+              <option value="INTP">INTP</option>
+              <option value="ESTP">ESTP</option>
+              <option value="ESFP">ESFP</option>
+              <option value="ENFP">ENFP</option>
+              <option value="ENTP">ENTP</option>
+              <option value="ESTJ">ESTJ</option>
+              <option value="ESFJ">ESFJ</option>
+              <option value="ENFJ">ENFJ</option>
+              <option value="ENTJ">ENTJ</option>
+            </select>
+          </div>
+
+          <section class="partner-details partner-disclosure full-field" id="partnerInfoSection"
+            aria-labelledby="partnerInfoTitle" aria-hidden="true" role="region" hidden>
+            <div class="partner-disclosure-inner">
+            <div class="partner-heading">
+              <div>
+                <h3 id="partnerInfoTitle">연인 정보 <span>선택</span></h3>
+                <p>입력하면 두 사람의 관계 전략을 더 구체적으로 구성합니다.</p>
+              </div>
+              <span aria-hidden="true">緣</span>
+            </div>
+            <div class="partner-grid">
+              <div class="field">
+                <label for="partner_name">연인 이름</label>
+                <input type="text" id="partner_name" name="partner_name" placeholder="이름 또는 닉네임" maxlength="50" />
+              </div>
+              <div class="field">
+                <label for="partner_gender">연인 성별</label>
+                <select id="partner_gender" name="partner_gender">
+                  <option value="">선택하지 않음</option>
+                  <option value="male">남성</option>
+                  <option value="female">여성</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="partner_birth_date">연인 생년월일</label>
+                <div class="compact-date-row">
+                  <select id="partner_calendar_type" name="partner_calendar_type" aria-label="연인 달력 유형">
+                    <option value="solar">양력</option>
+                    <option value="lunar">음력</option>
+                  </select>
+                  <input type="date" id="partner_birth_date" name="partner_birth_date" min="1900-01-01" />
+                </div>
+                <label class="check-row compact-check leap-month-row" id="partnerLeapMonthRow" for="partner_is_leap_month" hidden>
+                  <input type="checkbox" id="partner_is_leap_month" name="partner_is_leap_month" />
+                  <span>윤달</span>
+                </label>
+              </div>
+              <div class="field">
+                <label for="partner_birth_time">연인 태어난 시간</label>
+                <input type="time" id="partner_birth_time" name="partner_birth_time" />
+                <label class="check-row compact-check" for="partner_birth_time_unknown">
+                  <input type="checkbox" id="partner_birth_time_unknown" />
+                  <span>시간 모름</span>
+                </label>
+              </div>
+              <div class="field partner-mbti-field">
+                <label for="partner_mbti">연인 MBTI</label>
+                <select id="partner_mbti" name="partner_mbti">
+                  <option value="">모르거나 선택하지 않음</option>
+                  <option value="ISTJ">ISTJ</option>
+                  <option value="ISFJ">ISFJ</option>
+                  <option value="INFJ">INFJ</option>
+                  <option value="INTJ">INTJ</option>
+                  <option value="ISTP">ISTP</option>
+                  <option value="ISFP">ISFP</option>
+                  <option value="INFP">INFP</option>
+                  <option value="INTP">INTP</option>
+                  <option value="ESTP">ESTP</option>
+                  <option value="ESFP">ESFP</option>
+                  <option value="ENFP">ENFP</option>
+                  <option value="ENTP">ENTP</option>
+                  <option value="ESTJ">ESTJ</option>
+                  <option value="ESFJ">ESFJ</option>
+                  <option value="ENFJ">ENFJ</option>
+                  <option value="ENTJ">ENTJ</option>
+                </select>
+              </div>
+            </div>
+            </div>
+          </section>
+
+          <div class="field full-field basic-concern-field">
+            <div class="concern-label-row">
+              <label for="focus_concern">지금 가장 궁금한 고민 <span title="직무, 연차, 가장 힘든 점과 원하는 변화까지 적으면 더 구체적으로 분석합니다.">직접 입력 (선택)</span></label>
+              <span class="char-count" id="concernCharCount" aria-live="polite">0 / 200자</span>
+            </div>
+            <textarea
+              id="focus_concern"
+              name="focus_concern"
+              maxlength="200"
+              rows="3"
+              aria-describedby="concernHelp"
+              placeholder="예: 현 직장 5년차, 성장 정체로 이직 고민 (자유롭게 직접 입력)"
+            ></textarea>
+            <p class="field-help" id="concernHelp">직무, 연차, 이직, 연애, 재정 등 현재 겪고 있는 구체적인 고민을 적어주시면 현재 상황에 맞춰 해석합니다.</p>
+          </div>
+
+          <div class="form-section-heading full-field" id="consentSection"><span aria-hidden="true">03</span><div><h3>정보 이용 동의</h3><p>필수 처리 동의와 선택 항목을 각각 확인해주세요.</p></div></div>
+          <div class="privacy-panel full-field field">
+            <div class="privacy-consent-layout">
+              <label class="privacy-consent-row" for="processingConsent">
+                <input type="checkbox" id="processingConsent" name="processing_consent" value="true"
+                  required />
+                <span>
+                  <strong>개인정보 처리에 동의합니다. <em>*</em></strong>
+                  <p>입력 정보를 리포트 생성과 Gemini 분석에 사용합니다.</p>
+                </span>
+              </label>
+              <a class="privacy-detail-link" href="privacy.html" target="_blank" rel="noopener noreferrer"
+                aria-label="개인정보 이용 상세 안내를 새 탭에서 보기">
+                상세 안내 <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="history-consent full-field">
+            <label class="check-row" for="emailNotificationConsent">
+              <input type="checkbox" id="emailNotificationConsent" name="email_notification_consent" />
+              <span>운영자에게 접수 알림을 보내는 데 동의합니다. (선택 · 작업 번호만 전송)</span>
+            </label>
+          </div>
+
+          <div class="history-consent full-field">
+            <label class="check-row" for="historyConsent">
+              <input type="checkbox" id="historyConsent" name="history_consent" />
+              <span>이 기기에 분석 기록을 저장할게요. (선택 · 최대 30일)</span>
+            </label>
+          </div>
+
+          <button class="create-report-button full-field" id="submitButton" type="submit">
+            <span>무료 요약 만들기</span>
+          </button>
+          <p class="submission-note full-field">현재 전체 리포트는 체험용으로 제공되며, 실제 결제는 진행되지 않습니다.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <section class="overlay hidden" id="loadingContainer" aria-live="polite" aria-busy="true" tabindex="-1">
+    <div class="dialog-box">
+      <div class="book-loader" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h2>한 권의 리포트를 엮고 있습니다</h2>
+      <p>요청을 전송하고 있습니다. 접수되면 분석 진행 화면으로 이동합니다.</p>
+    </div>
+  </section>
+
+  <section class="overlay hidden" id="errorContainer" aria-live="assertive" tabindex="-1">
+    <div class="dialog-box error-box">
+      <span class="dialog-seal" aria-hidden="true">!</span>
+      <h2>문제가 발생했습니다</h2>
+      <p id="errorMessage">잠시 후 다시 시도해주세요.</p>
+      <button type="button" id="retryButton">다시 시도</button>
+    </div>
+  </section>
+
+  <script src="../api-config.js"></script>
+  <script type="module" src="../assets/js/input.js?v=20260908-3"></script>
+</body>
+
+</html>

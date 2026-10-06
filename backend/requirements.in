@@ -1,0 +1,7 @@
+fastapi>=0.141.1,<0.142
+starlette>=1.6.0,<2
+httpx>=0.28.1,<1
+lunar_python==1.4.8
+pydantic>=2.13.5,<3
+python-dotenv>=1.2.3,<2
+uvicorn[standard]>=0.52.4,<1

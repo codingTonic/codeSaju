@@ -1,0 +1,53 @@
+/* Extend Yeoul's existing water / paper palette and reading typography. */
+[hidden] { display: none !important; }
+.instant-view { max-width: 1120px; margin: 0 auto; padding: 40px 28px 100px; }
+.instant-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; margin-top: 40px; align-items: start; }
+.instant-intro h1 { font-family: var(--serif, 'Gowun Batang', serif); font-size: clamp(32px, 4vw, 48px); font-weight: 400; line-height: 1.5; margin: 12px 0 22px; letter-spacing: -.04em; }
+.instant-intro p, .instant-intro li { line-height: 1.9; }
+.instant-intro a, .premium-preparation a, .instant-consent a { text-decoration: underline; text-underline-offset: 4px; }
+.instant-benefits { padding-left: 20px; margin: 30px 0; }
+.instant-form { background: #fff; border: 1px solid #cbd8e5; padding: 28px; border-radius: 18px; }
+.instant-form .field-label:first-of-type { margin-top: 0; }
+.instant-form .button { width: 100%; margin-top: 24px; }
+.instant-consent { border-top: 1px solid #d6e0e9; padding-top: 16px; margin-top: 24px; font-size: 16px; line-height: 1.75; }
+.instant-consent .check-label { align-items: flex-start; }
+.premium-preparation { padding: 28px 8px 0; }
+.premium-preparation h2 { font-size: 21px; margin: 10px 0; }
+.premium-preparation p { line-height: 1.8; }
+.premium-preparation .button { width: 100%; }
+.premium-preparation a { display: inline-block; margin: 12px 16px 0 0; }
+.premium-methods { font-weight: 600; color: #4a5d70; }
+.preparation-label { color: #405174; font-size: 14px; font-weight: 600; }
+.instant-result { max-width: 780px; margin: 72px auto 0; padding-top: 36px; border-top: 2px solid #5261c9; scroll-margin-top: 100px; }
+.instant-result-heading h2 { font: 400 32px/1.5 'Gowun Batang', serif; margin: 10px 0; }
+.instant-result p { line-height: 1.9; }
+.instant-result h3 { font-size: 20px; margin-top: 32px; }
+.instant-elements { display: grid; gap: 12px; margin: 20px 0; }
+.instant-elements > div { display: flex; align-items: center; gap: 16px; }
+.instant-elements meter { flex: 1; min-width: 0; height: 20px; accent-color: #5261c9; }
+.instant-elements b { font-size: 14px; min-width: 30px; }
+.instant-table-wrap { overflow-x: auto; }
+.instant-table { border-collapse: collapse; width: 100%; min-width: 330px; margin: 16px 0 28px; font-size: 14px; text-align: center; }
+.instant-table th, .instant-table td { border-bottom: 1px solid #cbd8e5; padding: 14px 8px; line-height: 1.7; }
+.instant-table th { font-weight: 600; }
+.instant-result .basis { margin-top: 20px; }
+@media (max-width: 760px) {
+  .instant-view { padding: 24px 20px 60px; }
+  .instant-layout { grid-template-columns: 1fr; gap: 32px; margin-top: 24px; }
+  .instant-intro h1 { font-size: 34px; }
+  .instant-benefits { margin: 18px 0; }
+  .instant-form { padding: 22px 18px; }
+  .instant-result { margin-top: 44px; }
+  .site-header nav { gap: 12px; font-size: 14px; }
+  .site-header .brand span { display: none; }
+}
+
+/* Keep plain-language labels readable alongside the chart. */
+.instant-elements > div > span { flex: 0 0 90px; }
+.instant-result .pillar > span { line-height: 1.6; word-break: keep-all; }
+.instant-table th { word-break: keep-all; }
+
+.instant-field-error { color: #9c3e35; font-size: 14px; line-height: 1.7; margin: 8px 0; }
+.instant-form [aria-invalid="true"] { border-color: #9c3e35; }
+#instant-error ul { padding-left: 20px; margin: 8px 0 0; }
+#instant-error a { display: inline-block; padding-block: 6px; line-height: 1.7; }
